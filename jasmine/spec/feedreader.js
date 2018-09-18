@@ -9,6 +9,7 @@
  * to ensure they don't run until the DOM is ready.
  */
 $(function() {
+    "use strict";
     /* This is our first test suite - a test suite just contains
      * a related set of tests. This suite is all about the RSS
      * feeds definitions, the allFeeds variable in our application.
@@ -84,6 +85,14 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
+        beforeEach(function(done) {
+            loadFeed(0, done);
+        });
+
+        it('has at least 1 entry in the feed container', function() {
+            let entriesLength = $('.feed .entry').length;
+            expect(entriesLength).toBeGreaterThan(0);
+        });
     });
 
     /* TODO: Write a new test suite named "New Feed Selection" */
